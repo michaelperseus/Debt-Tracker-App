@@ -39,7 +39,6 @@ app.get('', (req, res) => {
 
 //Adds a new debt to the database with sent data
 app.post("/newDebt", async (req, res) => {
-    // console.log(req.body);
     const debt = new Debt(req.body);
     try {
         await debt.save();
@@ -58,8 +57,13 @@ app.get("/seeDebt/:name", async (req, res) => {
 
     try {
         const debt = await Debt.findOne({name});
-        const remaining = (debt.startingBalance - debt.amountPaid);
-        res.send(`You have ${remaining} left to pay!`);
+        if (debt) {
+            const remaining = (debt.startingBalance - debt.amountPaid);
+            res.send(`You have ${remaining} left to pay!`);
+        } else {
+            res.status(404).send("Could not locate that debt");
+        }
+        
     } catch (e) {
         res.send(e);
     }

@@ -30,15 +30,11 @@
                     <input type="radio" id="autopayOn" name="autopay" value="Yes"><label>Yes</label>
                     <input type="radio" id="autopayOff" name="autopay" value="No"><label>No</label>
                 </div>
-                <!--<div class="formGroup">
-                    <label for="accountFrom">Nickname for account it's paid from</label>
-                    <input type="text" id="acconutFront" placeholder="My Savings Account">
-                </div>-->
                 <div class="formGroup">
                     <input type="submit" id="submitDebt" value="Create New Debt">
                 </div>
-                
             </form>
+            <p id="created" class="response"></p>
 
             <form id="searchDebtForm">
                 <div class="formGroup">
@@ -48,9 +44,8 @@
                 <div class="formGroup">
                     <input type="submit" id="searchDebt" value="Search Debt">
                 </div>
-                <p id="remaining"></p>
-                
             </form>
+            <p id="remaining" class="response"></p>
         </div>
         
         {{>footer}}

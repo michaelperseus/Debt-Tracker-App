@@ -9,3 +9,8 @@
 form {
     margin: 10px 0 50px 10px;
 }
+
+.response {
+    font-weight: bold;
+    color: #BADA55;
+}

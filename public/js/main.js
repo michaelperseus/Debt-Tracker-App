@@ -1,7 +1,8 @@
+//Creates the variables for the forms
 const submitDebtForm = document.getElementById("newDebtForm");
 const searchDebtForm = document.getElementById("searchDebtForm");
 
-
+//Creates the Debt
 submitDebtForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = submitDebtForm.querySelector("#debtName").value;
@@ -11,6 +12,11 @@ submitDebtForm.addEventListener("submit", (e) => {
     const autopay = submitDebtForm.querySelector("#autopayOn").checked;
 
     var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.status == 201) {
+            document.getElementById("created").innerHTML = this.response;
+       }
+    };
     request.open("POST", "/newDebt", true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({
@@ -23,16 +29,15 @@ submitDebtForm.addEventListener("submit", (e) => {
 
 })
 
+//Returns the requested debt's remaining balance
 searchDebtForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = searchDebtForm.querySelector("#searchDebtName").value;
-    console.log(name);
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
-        if (this.status == 200) {
+        if (this.status == 200 || this.status == 404) {
             document.getElementById("remaining").innerHTML = this.response;
-            console.log(this.response);
        }
     };
     request.open("GET", `/seeDebt/${name}`, true);
