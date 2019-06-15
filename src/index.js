@@ -25,6 +25,10 @@ app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
+
+//Setup for static directory
+app.use(express.static(publicDirectoryPath));
+
 //Renders the main page
 app.get('', (req, res) => {
     res.render('index', {
@@ -35,23 +39,25 @@ app.get('', (req, res) => {
 
 //Adds a new debt to the database with sent data
 app.post("/newDebt", async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const debt = new Debt(req.body);
     try {
         await debt.save();
         res.status(201).send("Debt added successfully!");
     } catch (e) {
+        console.log(e);
         res.status(500).send(e);
     }
     
 })
 
 //Returns the requested Debt and displays the remaining balance
-app.get("/seeDebt/:id", async (req, res) => {
-    const _id = req.params.id;
+app.get("/seeDebt/:name", async (req, res) => {
+    const name = req.params.name.replace("+", " ");
+    console.log(name);
 
     try {
-        const debt = await Debt.findById(_id);
+        const debt = await Debt.findOne({name});
         const remaining = (debt.startingBalance - debt.amountPaid);
         res.send(`You have ${remaining} left to pay!`);
     } catch (e) {

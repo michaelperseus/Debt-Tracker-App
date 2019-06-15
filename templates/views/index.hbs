@@ -8,10 +8,53 @@
     <body>
         <div class='mainContent'>
             {{>header}}
-            <p>This is only the beginning...</p>
+            <form id="newDebtForm">
+                <div class="formGroup">
+                    <label for="debtName">Debt Name</label>
+                    <input type="text" id="debtName" placeholder="Capitol One" name="name">
+                </div>
+                <div class="formGroup">
+                    <label for="startingBalance">Starting Amount</label>
+                    <input type="number" id="startingBalance" placeholder="1000" name="startingBalance">
+                </div>
+                <div class="formGroup">
+                    <label for="minimumPayment">Minimum Payment</label>
+                    <input type="number" id="minimumPayment" placeholder="25" name="minimumPayment">
+                </div>
+                <div class="formGroup">
+                    <label for="dueDate">Due Date (Just the number of the month)</label>
+                    <input type="number" id="dueDate" placeholder="5" name="dueDate">
+                </div>
+                <div class="formGroup">
+                    <span>AutoPay</span>
+                    <input type="radio" id="autopayOn" name="autopay" value="Yes"><label>Yes</label>
+                    <input type="radio" id="autopayOff" name="autopay" value="No"><label>No</label>
+                </div>
+                <!--<div class="formGroup">
+                    <label for="accountFrom">Nickname for account it's paid from</label>
+                    <input type="text" id="acconutFront" placeholder="My Savings Account">
+                </div>-->
+                <div class="formGroup">
+                    <input type="submit" id="submitDebt" value="Create New Debt">
+                </div>
+                
+            </form>
+
+            <form id="searchDebtForm">
+                <div class="formGroup">
+                    <label for="searchDebtName">Debt Name</label>
+                    <input type="text" id="searchDebtName" placeholder="Capitol One" name="name" required>
+                </div>
+                <div class="formGroup">
+                    <input type="submit" id="searchDebt" value="Search Debt">
+                </div>
+                <p id="remaining"></p>
+                
+            </form>
         </div>
         
         {{>footer}}
     <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </body>
 </html>
